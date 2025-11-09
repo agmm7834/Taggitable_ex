@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<article class="article-detail">
+    <h2>{{ article.title }}</h2>
+    <p class="meta">Обновлено {{ article.updated_at|date:"d E Y H:i" }}</p>
+    <div class="article-body">
+        {{ article.content|linebreaks }}
+    </div>
+    {% if article.tags.all %}
+        <section class="article-tags">
+            <h3>Теги</h3>
+            <ul class="tag-list inline">
+                {% for tag in article.tags.all %}
+                    <li><a href="{% url 'articles:by_tag' tag.slug %}">{{ tag.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endif %}
+</article>
+<p><a class="back-link" href="{% url 'articles:list' %}">Назад к списку</a></p>
+{% endblock %}
+

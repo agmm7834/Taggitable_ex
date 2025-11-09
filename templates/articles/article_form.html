@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Новая статья{% endblock %}
+
+{% block content %}
+<section class="form-wrapper">
+    <h2>Создать статью</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <div class="form-field">
+            <label for="{{ form.title.id_for_label }}">Заголовок</label>
+            {{ form.title }}
+            {{ form.title.errors }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.content.id_for_label }}">Содержимое</label>
+            {{ form.content }}
+            {{ form.content.errors }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.tags.id_for_label }}">Теги</label>
+            {{ form.tags }}
+            <small class="help">{{ form.fields.tags.help_text }}</small>
+            {{ form.tags.errors }}
+        </div>
+        <button type="submit" class="btn">Сохранить</button>
+    </form>
+</section>
+{% endblock %}
+

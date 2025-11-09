@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Тег {{ tag.name }}{% endblock %}
+
+{% block content %}
+<section class="content-header">
+    <h2>Материалы с тегом {{ tag.name }}</h2>
+    <a class="back-link" href="{% url 'articles:list' %}">Все статьи</a>
+</section>
+
+{% if articles %}
+    <section class="article-list">
+        {% for article in articles %}
+            <article>
+                <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+                <p class="meta">Опубликовано {{ article.created_at|date:"d E Y H:i" }}</p>
+                <p>{{ article.content|truncatewords:40 }}</p>
+                <ul class="tag-list inline">
+                    {% for inner_tag in article.tags.all %}
+                        <li><a href="{% url 'articles:by_tag' inner_tag.slug %}">{{ inner_tag.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </article>
+        {% endfor %}
+    </section>
+{% else %}
+    <p>Для этого тега пока нет контента.</p>
+{% endif %}
+{% endblock %}
+

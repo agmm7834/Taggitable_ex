@@ -1,0 +1,138 @@
+:root {
+    color-scheme: light;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    line-height: 1.5;
+    background-color: #f5f5f8;
+    color: #222;
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.site-header,
+.site-footer {
+    background: #1c1f2b;
+    color: #fff;
+}
+
+.site-header a,
+.site-footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.site-header nav a {
+    margin-left: 1rem;
+    font-weight: 600;
+}
+
+.content-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.tags-sidebar {
+    background: #fff;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.tag-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tag-list li {
+    margin-bottom: 0.5rem;
+}
+
+.tag-list.inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag-list.inline li {
+    background: #e1e7ff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    margin: 0;
+}
+
+.tag-list a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.tag-list li.active a {
+    font-weight: 700;
+}
+
+.article-list article,
+.article-detail,
+.form-wrapper {
+    background: #fff;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.meta {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.form-field input,
+.form-field textarea {
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.btn {
+    display: inline-block;
+    background: #3b5bdb;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #364fc7;
+}
+
+.back-link {
+    color: #3b5bdb;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+

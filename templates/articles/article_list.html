@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if active_tag %}
+        Статьи с тегом {{ active_tag.name }}
+    {% else %}
+        Лента статей
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section class="content-header">
+    <h2>
+        {% if active_tag %}
+            Тег: {{ active_tag.name }}
+        {% else %}
+            Последние статьи
+        {% endif %}
+    </h2>
+    {% if active_tag %}
+        <a class="back-link" href="{% url 'articles:list' %}">Сбросить фильтр</a>
+    {% endif %}
+</section>
+
+<aside class="tags-sidebar">
+    <h3>Все теги</h3>
+    {% if tags %}
+        <ul class="tag-list">
+            {% for tag in tags %}
+                <li class="{% if active_tag and tag.pk == active_tag.pk %}active{% endif %}">
+                    <a href="{% url 'articles:by_tag' tag.slug %}">{{ tag.name }} <span>{{ tag.taggit_taggeditem_items.count }}</span></a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Пока нет тегов.</p>
+    {% endif %}
+</aside>
+
+<section class="article-list">
+    {% for article in articles %}
+        <article>
+            <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+            <p class="meta">Опубликовано {{ article.created_at|date:"d E Y H:i" }}</p>
+            <p>{{ article.content|truncatewords:40 }}</p>
+            {% if article.tags.all %}
+                <ul class="tag-list inline">
+                    {% for tag in article.tags.all %}
+                        <li><a href="{% url 'articles:by_tag' tag.slug %}">{{ tag.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </article>
+    {% empty %}
+        <p>Статей пока нет. <a href="{% url 'articles:create' %}">Создайте первую.</a></p>
+    {% endfor %}
+</section>
+
+{% if is_paginated %}
+    <nav class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">&laquo; Назад</a>
+        {% endif %}
+        <span>Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Вперёд &raquo;</a>
+        {% endif %}
+    </nav>
+{% endif %}
+{% endblock %}
+
